@@ -83,6 +83,9 @@
                     <div class="subheader__content">
                         {% block synopsis %}
                         {% if course.duration or course.effort or current_page.publisher_is_draft %}
+                        {% if current_page.publisher_is_draft or not current_page|is_empty_placeholder:"course_introduction" %}
+                            <div property="description">{% placeholder "course_introduction" or %}<p>{% trans 'Enter here a introduction of your course.' %}</p>{% endplaceholder %}</div>
+                        {% endif %}
                         <div class="characteristics">
                             <ul class="characteristics__container">
                             {% render_model_block course "duration,effort,is_self_paced" %}
@@ -118,9 +121,7 @@
                         {% endif %}
                         {% endblock synopsis %}
 
-                        {% if current_page.publisher_is_draft or not current_page|is_empty_placeholder:"course_introduction" %}
-                            <div property="description">{% placeholder "course_introduction" or %}<p>{% trans 'Enter here a introduction of your course.' %}</p>{% endplaceholder %}</div>
-                        {% endif %}
+                        
                     </div>
 
                     {% block enrollment_count %}
