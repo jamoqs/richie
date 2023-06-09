@@ -13,6 +13,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.functional import cached_property, lazy
 from django.utils.translation import gettext_lazy as _
+from richie.apps.core.fields.multiselect import to_sentence, capfirst
 
 import pytz
 from cms.constants import PUBLISHER_STATE_DIRTY
@@ -483,9 +484,9 @@ class Course(EsIdMixin, BasePageExtension):
         ).aggregate(sum=Sum("enrollment_count"))["sum"]
 
     @cached_property
-    def course_runs_languages(self):
+    def course_languages(self):
         """
-        Returns a query that languages avaliable of each course run. They may be directly
+        Returns a query that languages avaliable of each course run(merged). They may be directly
         related to the course or to a snapshot of the course.
 
         The draft and the public page have their own course runs. The course runs on the draft
@@ -495,32 +496,25 @@ class Course(EsIdMixin, BasePageExtension):
         node = self.extended_object.node
         current_and_descendant_nodes = node.__class__.get_tree(parent=node)
 
-        course_run = CourseRun.objects.filter(
+        course_runs = CourseRun.objects.filter(
             direct_course__extended_object__node__in=current_and_descendant_nodes,
             direct_course__extended_object__publisher_is_draft=is_draft,
-            direct_course_id=OuterRef("pk"),
         )
-
-        course_run_languages = CourseRun.objects.filter(
-            direct_course__extended_object__node__in=current_and_descendant_nodes,
-            direct_course__extended_object__publisher_is_draft=is_draft,
-        ).annotate(course_language=Subquery(course_run.values_list("languages")[:1]))
-
-        course_languages = [
+        adverbs = ["and", "et", "e"]
+        course_runs_languages = [
             x.split(" ")
             for x in list(
                 map(
                     lambda x: x.get_languages_display().lower().replace(",", ""),
-                    course_run_languages,
+                    course_runs,
                 )
             )
         ]
         languages = list(
-            set([x for y in course_languages for x in y if x in y and x != "and"])
-        )
-        languages.sort()
+                set([x for y in course_runs_languages for x in y if x in y and x not in adverbs])
+            )
 
-        return languages
+        return capfirst(to_sentence(languages))
 
     @property
     def course_runs_dict(self):
