@@ -123,28 +123,28 @@
                                         <span class="characteristics__term">{% trans "Languages:" %} {{ course.course_languages_display|default:"NA" }}</span>
                                     </li>
                                 </div>
+                                {% block enrollment_count %}
+                                    {% with enrollment_count=course.course_runs_enrollment_count %}
+                                        {% if enrollment_count > 0 and RICHIE_MINIMUM_COURSE_RUNS_ENROLLMENT_COUNT > 0 and enrollment_count >= RICHIE_MINIMUM_COURSE_RUNS_ENROLLMENT_COUNT %}
+                                            <div class="characteristics__enrollment-count">
+                                                <li class="characteristics__item">
+                                                <svg role="img" class="characteristics__icon" aria-hidden="true">
+                                                    <use href="#icon-groups" />
+                                                </svg>
+                                                {% blocktrans with count=enrollment_count|intcomma %}
+                                                    {{ count }} already enrolled!
+                                                </li>
+                                                {% endblocktrans %}
+                                            </div>
+                                        {% endif %}
+                                    {% endwith %}
+                                {% endblock enrollment_count %}
                             {% endrender_model_block %}
                             </ul>
                         </div>
                         {% endif %}
                         {% endblock synopsis %}
                     </div>
-                    {% block enrollment_count %}
-                        {% with enrollment_count=course.course_runs_enrollment_count %}
-                            {% if enrollment_count > 0 and RICHIE_MINIMUM_COURSE_RUNS_ENROLLMENT_COUNT > 0 and enrollment_count >= RICHIE_MINIMUM_COURSE_RUNS_ENROLLMENT_COUNT %}
-                                <div class="subheader__enrollment-count">
-                                    <li class="characteristics__item">
-                                    <svg role="img" class="characteristics__icon" aria-hidden="true">
-                                        <use href="#icon-groups" />
-                                    </svg>
-                                    {% blocktrans with count=enrollment_count|intcomma %}
-                                        {{ count }} already enrolled!
-                                    </li>
-                                    {% endblocktrans %}
-                                </div>
-                            {% endif %}
-                        {% endwith %}
-                    {% endblock enrollment_count %}
 
                     <div class="subheader__teaser">
                         {% placeholder "course_teaser" or %}
