@@ -14,6 +14,7 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 - Add cunningham and design system.
 - Specific sidebar for order related routes
 - List teacher's course's course runs in the teacher course dashboard page.
+- All languages avaliable for courses in tha page course details
 
 ### Changed
 
