@@ -14,6 +14,7 @@ describe('validationSchema', () => {
       country: faker.location.countryCode(),
       first_name: faker.person.firstName(),
       last_name: faker.person.lastName(),
+      vat_id: faker.finance.routingNumber(),
       postcode: faker.location.zipCode(),
       title: faker.lorem.word(),
       save: false,
@@ -33,6 +34,7 @@ describe('validationSchema', () => {
     result.current.register('country');
     result.current.register('first_name');
     result.current.register('last_name');
+    result.current.register('vat_id');
     result.current.register('postcode');
     result.current.register('title');
     result.current.register('save');
@@ -48,6 +50,7 @@ describe('validationSchema', () => {
     expect(formState.errors.country).not.toBeDefined();
     expect(formState.errors.first_name).not.toBeDefined();
     expect(formState.errors.last_name).not.toBeDefined();
+    expect(formState.errors.vat_id).not.toBeDefined();
     expect(formState.errors.postcode).not.toBeDefined();
     expect(formState.errors.title).not.toBeDefined();
     expect(formState.errors.save).not.toBeDefined();
@@ -68,6 +71,7 @@ describe('validationSchema', () => {
     result.current.register('country');
     result.current.register('first_name');
     result.current.register('last_name');
+    result.current.register('vat_id');
     result.current.register('postcode');
     result.current.register('title');
     result.current.register('save');
@@ -108,6 +112,13 @@ describe('validationSchema', () => {
     expect((formState.errors.last_name?.message as ErrorMessageObject)?.values?.path).toEqual(
       'last_name',
     );
+    expect(formState.errors.vat_id?.type).toEqual('optionality');
+    expect((formState.errors.vat_id?.message as ErrorMessageObject)?.key).toEqual(
+      'mixedRequired',
+    );
+    expect((formState.errors.vat_id?.message as ErrorMessageObject)?.values?.path).toEqual(
+      'vat_id',
+    );
     expect(formState.errors.postcode?.type).toEqual('optionality');
     expect((formState.errors.postcode?.message as ErrorMessageObject)?.key).toEqual(
       'mixedRequired',
@@ -129,6 +140,7 @@ describe('validationSchema', () => {
       result.current.setValue('country', 'AA');
       result.current.setValue('first_name', faker.person.firstName());
       result.current.setValue('last_name', faker.person.lastName());
+      result.current.setValue('vat_id', faker.finance.routingNumber());
       result.current.setValue('postcode', faker.location.zipCode());
       result.current.setValue('title', faker.lorem.word());
       result.current.trigger();
@@ -144,6 +156,7 @@ describe('validationSchema', () => {
     );
     expect(formState.errors.first_name).not.toBeDefined();
     expect(formState.errors.last_name).not.toBeDefined();
+    expect(formState.errors.vat_id).not.toBeDefined();
     expect(formState.errors.postcode).not.toBeDefined();
     expect(formState.errors.title).not.toBeDefined();
     expect(formState.errors.save).not.toBeDefined();
@@ -161,6 +174,7 @@ describe('validationSchema', () => {
     expect(formState.errors.country).not.toBeDefined();
     expect(formState.errors.first_name).not.toBeDefined();
     expect(formState.errors.last_name).not.toBeDefined();
+    expect(formState.errors.vat_id).not.toBeDefined();
     expect(formState.errors.postcode).not.toBeDefined();
     expect(formState.errors.title).not.toBeDefined();
     expect(formState.errors.save).not.toBeDefined();

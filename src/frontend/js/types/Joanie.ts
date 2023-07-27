@@ -17,6 +17,18 @@ export interface PaginatedParameters {
   offset: number;
 }
 
+export interface PaymentAddressForm {
+  vat_id?: string;
+  address?: string;
+  city?: string;
+  country?: string;
+}
+
+export interface complementaryConfigurations {
+  paymentAddressForm?: PaymentAddressForm;
+  country?: string;
+}
+
 export interface Organization {
   id: string;
   code: string;
@@ -225,11 +237,14 @@ export interface Address {
   country: string;
   first_name: string;
   last_name: string;
-  id: string;
-  is_main: boolean;
-  postcode: string;
-  title: string;
+  [key: string]: string | boolean | undefined;
 }
+  // vat_id: string | undefined ;
+  // id: string;
+  // is_main: boolean;
+  // postcode: string;
+  // title: string;
+
 
 // Wishlist
 export interface UserWishlistCourse {
@@ -406,6 +421,9 @@ export interface API {
     ): Filters extends { id: string }
       ? Promise<Nullable<CourseProductRelation>>
       : Promise<PaginatedResponse<CourseProductRelation>>;
+  };
+  complementaryConfigurations: {
+    get(): Promise<complementaryConfigurations>;
   };
 }
 

@@ -7,6 +7,7 @@ import { CheckboxField, TextField } from 'components/Form';
 import { CountrySelectField } from 'components/Form/CountrySelectField';
 import { useAddresses } from 'hooks/useAddresses';
 import type { Address } from 'types/Joanie';
+import JoanieApi from 'api/joanie';
 import validationSchema, { getLocalizedErrorMessage } from './validationSchema';
 
 export type AddressFormValues = Omit<Address, 'id' | 'is_main'> & { save: boolean | undefined };
@@ -17,17 +18,32 @@ interface Props {
   handleReset: () => void;
 }
 
+const complementaryConfigurations = {
+          country: '', 
+          paymentAddressForm: {}}
+
+const setComplementaryConfigurations = (async () => {
+    const response = await JoanieApi().complementaryConfigurations.get();
+    complementaryConfigurations.country = response.country?.toString() || '';
+    complementaryConfigurations.paymentAddressForm = response.paymentAddressForm || {}; 
+  })();
+
+
 const AddressForm = ({ handleReset, onSubmit, address }: Props) => {
+  
   const defaultValues = {
     title: '',
     first_name: '',
     last_name: '',
     address: '',
+    vat_id: '',
     postcode: '',
     city: '',
-    country: '-',
+    country: complementaryConfigurations.country, 
     save: false,
   } as AddressFormValues;
+
+  console.log(defaultValues)
 
   const { register, handleSubmit, reset, formState } = useForm<AddressFormValues>({
     defaultValues,
@@ -84,6 +100,16 @@ const AddressForm = ({ handleReset, onSubmit, address }: Props) => {
           error={!!formState.errors.last_name}
           message={getLocalizedErrorMessage(intl, formState.errors.last_name?.message)}
           {...register('last_name')}
+        />
+      </div>
+      <div className="form-group">
+        <TextField
+          aria-invalid={!!formState.errors.vat_id}
+          id="vat_id"
+          label={intl.formatMessage(messages.vat_idInputLabel)}
+          error={!!formState.errors.vat_id}
+          message={getLocalizedErrorMessage(intl, formState.errors.vat_id?.message)}
+          {...register('vat_id')}
         />
       </div>
       <TextField

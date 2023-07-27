@@ -48,6 +48,11 @@ export const messages = defineMessages({
     description: 'Label of the "last_name" input',
     defaultMessage: "Recipient's last name",
   },
+  vat_idInputLabel: {
+    id: 'components.AddressesManagement.vat_IdInput',
+    description: 'Label of the "vat_id" input',
+    defaultMessage: "Recipient's vat identification",
+  },
   addressInputLabel: {
     id: 'components.AddressesManagement.addressInput',
     description: 'Label of the "address" input',

@@ -122,6 +122,7 @@ describe('AddressesManagement', () => {
     const $titleField = screen.getByRole('textbox', { name: 'Address title' });
     const $firstnameField = screen.getByRole('textbox', { name: "Recipient's first name" });
     const $lastnameField = screen.getByRole('textbox', { name: "Recipient's last name" });
+    const $vatIdField = screen.getByRole('textbox', { name: "Recipient's vat identification" });
     const $addressField = screen.getByRole('textbox', { name: 'Address' });
     const $cityField = screen.getByRole('textbox', { name: 'City' });
     const $postcodeField = screen.getByRole('textbox', { name: 'Postcode' });
@@ -141,6 +142,7 @@ describe('AddressesManagement', () => {
       fireEvent.input($titleField, { target: { value: address.title } });
       fireEvent.change($firstnameField, { target: { value: address.first_name } });
       fireEvent.change($lastnameField, { target: { value: address.last_name } });
+      fireEvent.change($vatIdField, { target: { value: address.vat_id } });
       fireEvent.change($addressField, { target: { value: address.address } });
       fireEvent.change($cityField, { target: { value: address.city } });
       fireEvent.change($postcodeField, { target: { value: address.postcode } });
@@ -227,6 +229,9 @@ describe('AddressesManagement', () => {
     let $lastnameField = screen.getByRole('textbox', {
       name: "Recipient's last name",
     }) as HTMLInputElement;
+    let $vatIdField = screen.getByRole('textbox', {
+      name: "Recipient's vat identification",
+    }) as HTMLInputElement;
     let $addressField = screen.queryByRole('textbox', { name: 'Address' }) as HTMLInputElement;
     let $cityField = screen.queryByRole('textbox', { name: 'City' }) as HTMLInputElement;
     let $postcodeField = screen.queryByRole('textbox', { name: 'Postcode' }) as HTMLInputElement;
@@ -237,6 +242,7 @@ describe('AddressesManagement', () => {
     expect($titleField.value).toEqual(address.title);
     expect($firstnameField.value).toEqual(address.first_name);
     expect($lastnameField.value).toEqual(address.last_name);
+    expect($vatIdField.value).toEqual(address.vat_id);
     expect($addressField.value).toEqual(address.address);
     expect($cityField.value).toEqual(address.city);
     expect($postcodeField.value).toEqual(address.postcode);
@@ -253,6 +259,7 @@ describe('AddressesManagement', () => {
         title: 'Home',
         first_name: 'John',
         last_name: 'DOE',
+        vat_id: '123456789',
       })
       .get(
         'https://joanie.endpoint/api/v1.0/addresses/',
@@ -262,6 +269,7 @@ describe('AddressesManagement', () => {
             title: 'Home',
             first_name: 'John',
             last_name: 'DOE',
+            vat_id: '123456789',
           },
         ],
         { overwriteRoutes: true },
@@ -271,6 +279,7 @@ describe('AddressesManagement', () => {
       fireEvent.change($titleField, 'Home');
       fireEvent.change($firstnameField, 'John');
       fireEvent.change($lastnameField, 'DOE');
+      fireEvent.change($vatIdField, '123456789');
       fireEvent.click($submitButton);
     });
 
@@ -297,6 +306,9 @@ describe('AddressesManagement', () => {
     $lastnameField = screen.getByRole('textbox', {
       name: "Recipient's last name",
     }) as HTMLInputElement;
+    $vatIdField = screen.getByRole('textbox', {
+      name: "Recipient's vat identification",
+    }) as HTMLInputElement;
     $addressField = screen.queryByRole('textbox', { name: 'Address' }) as HTMLInputElement;
     $cityField = screen.queryByRole('textbox', { name: 'City' }) as HTMLInputElement;
     $postcodeField = screen.queryByRole('textbox', { name: 'Postcode' }) as HTMLInputElement;
@@ -307,6 +319,7 @@ describe('AddressesManagement', () => {
     expect($titleField.value).toEqual('Home');
     expect($firstnameField.value).toEqual('John');
     expect($lastnameField.value).toEqual('DOE');
+    expect($vatIdField.value).toEqual('123456789');
     expect($addressField.value).toEqual(address.address);
     expect($cityField.value).toEqual(address.city);
     expect($postcodeField.value).toEqual(address.postcode);

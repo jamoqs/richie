@@ -234,6 +234,8 @@ export const SaleTunnelStepPayment = ({ product, next }: SaleTunnelStepPaymentPr
               <address className="SaleTunnelStepPayment__block--buyer__address">
                 {selectedAddress!.first_name}&nbsp;{selectedAddress!.last_name}
                 <br />
+                {selectedAddress!.vat_id}
+                <br />
                 {selectedAddress!.address}
                 <br />
                 {selectedAddress!.postcode} {selectedAddress!.city}, {selectedAddress!.country}

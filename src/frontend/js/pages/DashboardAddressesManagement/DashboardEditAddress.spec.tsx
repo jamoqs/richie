@@ -74,6 +74,9 @@ describe('<DashboardEditAddress/>', () => {
     const lastnameInput: HTMLInputElement = screen.getByRole('textbox', {
       name: "Recipient's last name",
     });
+    const vatIdInput: HTMLInputElement = screen.getByRole('textbox', {
+      name: "Recipient's vat identification",
+    });
     const addressInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Address' });
     const cityInput: HTMLInputElement = screen.getByRole('textbox', { name: 'City' });
     const postcodeInput: HTMLInputElement = screen.getByRole('textbox', { name: 'Postcode' });
@@ -82,6 +85,7 @@ describe('<DashboardEditAddress/>', () => {
     await waitFor(() => expect(titleInput.value).toBe(address.title));
     expect(firstnameInput.value).toBe(address.first_name);
     expect(lastnameInput.value).toBe(address.last_name);
+    expect(vatIdInput.value).toBe(address.vat_id);
     expect(addressInput.value).toBe(address.address);
     expect(cityInput.value).toBe(address.city);
     expect(postcodeInput.value).toBe(address.postcode);

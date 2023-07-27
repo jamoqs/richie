@@ -157,7 +157,7 @@ describe('SaleTunnelStepPayment', () => {
     const mainAddress = addresses.find((address) => address.is_main)!;
     screen.getByText(
       new RegExp(
-        `^${mainAddress.first_name}\\s${mainAddress.last_name}${mainAddress.address}${mainAddress.postcode}\\s${mainAddress.city},\\s${mainAddress.country}`,
+        `^${mainAddress.first_name}\\s${mainAddress.last_name}${mainAddress.vat_id}${mainAddress.address}${mainAddress.postcode}\\s${mainAddress.city},\\s${mainAddress.country}`,
       ),
       {
         selector: 'address',
@@ -171,7 +171,7 @@ describe('SaleTunnelStepPayment', () => {
     });
     screen.getByText(
       new RegExp(
-        `^${notMainAddress.first_name}\\s${notMainAddress.last_name}${notMainAddress.address}${notMainAddress.postcode}\\s${notMainAddress.city},\\s${notMainAddress.country}`,
+        `^${notMainAddress.first_name}\\s${notMainAddress.last_name}${notMainAddress.vat_id}${notMainAddress.address}${notMainAddress.postcode}\\s${notMainAddress.city},\\s${notMainAddress.country}`,
       ),
       {
         selector: 'address',

@@ -9,3 +9,12 @@ PYTHONUNBUFFERED=1
 
 # Synchronization
 DJANGO_RICHIE_COURSE_RUN_SYNC_SECRETS=shared secret
+
+# Payment form
+PAYMENT_FORM_ADDRESS_VISIBILITY="{
+            'vatId': 'optional',
+            'address': 'hidden',
+            'city': 'optional',
+            'country': 'require'
+            }"
+PAYMENT_FORM_ADDRESS_DEFAULT_COUNTRY="FR"

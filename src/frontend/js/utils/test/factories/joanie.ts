@@ -277,6 +277,7 @@ export const AddressFactory = factory((): Address => {
     country: faker.location.countryCode(),
     first_name: faker.person.firstName(),
     last_name: faker.person.lastName(),
+    vat_id: faker.finance.routingNumber(),
     id: faker.string.uuid(),
     is_main: false,
     postcode: faker.location.zipCode(),

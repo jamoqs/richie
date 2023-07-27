@@ -81,7 +81,7 @@ const RegisteredAddress = ({ promote, select, edit, remove, address }: Props) =>
         data-testid={`address-${address.id}-details`}
         id={`address-${address.id}-infos`}
       >
-        {address.first_name}&nbsp;{address.last_name}
+        {address.first_name}&nbsp;{address.last_name}&nbsp;{address.vat_id}
         <br />
         {address.address} {address.postcode} {address.city}, {address.country}
       </address>

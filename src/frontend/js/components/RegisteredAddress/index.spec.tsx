@@ -34,6 +34,7 @@ describe('RegisteredAddress', () => {
     const $details = getByTestId(container, `address-${address.id}-details`);
     expect($details.innerHTML).toContain(address.first_name);
     expect($details.innerHTML).toContain(address.last_name);
+    expect($details.innerHTML).toContain(address.vat_id);
     expect($details.innerHTML).toContain(address.address);
     expect($details.innerHTML).toContain(address.postcode);
     expect($details.innerHTML).toContain(address.city);

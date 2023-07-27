@@ -82,6 +82,7 @@ describe('AddressForm', () => {
     const $titleInput = screen.getByRole('textbox', { name: 'Address title' });
     const $firstnameInput = screen.getByRole('textbox', { name: "Recipient's first name" });
     const $lastnameInput = screen.getByRole('textbox', { name: "Recipient's last name" });
+    const $vatIdInput = screen.getByRole('textbox', { name: "Recipient's vat identification" });
     const $addressInput = screen.getByRole('textbox', { name: 'Address' });
     const $cityInput = screen.getByRole('textbox', { name: 'City' });
     const $postcodeInput = screen.getByRole('textbox', { name: 'Postcode' });
@@ -101,6 +102,7 @@ describe('AddressForm', () => {
       fireEvent.input($titleInput, { target: { value: address.title } });
       fireEvent.change($firstnameInput, { target: { value: address.first_name } });
       fireEvent.change($lastnameInput, { target: { value: address.last_name } });
+      fireEvent.change($vatIdInput, { target: { value: address.vat_id } });
       fireEvent.change($addressInput, { target: { value: address.address } });
       fireEvent.change($cityInput, { target: { value: address.city } });
       fireEvent.change($postcodeInput, { target: { value: address.postcode } });
@@ -158,6 +160,7 @@ describe('AddressForm', () => {
     const $titleInput = screen.getByRole('textbox', { name: 'Address title' });
     const $firstnameInput = screen.getByRole('textbox', { name: "Recipient's first name" });
     const $lastnameInput = screen.getByRole('textbox', { name: "Recipient's last name" });
+    const $vatIdInput = screen.getByRole('textbox', { name: "Recipient's vat identification" });
     const $addressInput = screen.getByRole('textbox', { name: 'Address' });
     const $cityInput = screen.getByRole('textbox', { name: 'City' });
     const $postcodeInput = screen.getByRole('textbox', { name: 'Postcode' });
@@ -176,6 +179,7 @@ describe('AddressForm', () => {
       fireEvent.input($titleInput, { target: { value: address.title } });
       fireEvent.change($firstnameInput, { target: { value: address.first_name } });
       fireEvent.change($lastnameInput, { target: { value: address.last_name } });
+      fireEvent.change($vatIdInput, { target: { value: address.vat_id } });
       fireEvent.change($addressInput, { target: { value: address.address } });
       fireEvent.change($cityInput, { target: { value: address.city } });
       fireEvent.change($postcodeInput, { target: { value: address.postcode } });

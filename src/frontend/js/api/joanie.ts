@@ -171,6 +171,9 @@ export const getRoutes = () => {
     courseProductRelations: {
       get: `${baseUrl}/course-product-relations/:id/`,
     },
+    complementaryConfigurations: {
+      get: `${baseUrl}/complementary-configurations/`,
+    },
   };
 };
 
@@ -416,6 +419,12 @@ const API = (): Joanie.API => {
         return fetchWithJWT(url).then(checkStatus);
       },
     },
+    complementaryConfigurations: {
+      get: async() => {
+        const url = ROUTES.complementaryConfigurations.get;
+      return fetchWithJWT(url).then(checkStatus);
+    },
+  }
   };
 };
 

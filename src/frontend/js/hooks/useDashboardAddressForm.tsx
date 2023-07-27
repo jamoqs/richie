@@ -26,6 +26,7 @@ const validationSchema = Yup.object().shape({
   country: Yup.string().oneOf(Object.keys(countries.getAlpha2Codes())).required(),
   first_name: Yup.string().required(),
   last_name: Yup.string().required(),
+  vat_id: Yup.string().optional(),
   postcode: Yup.string().required(),
   title: Yup.string().required().min(2),
   is_main: Yup.boolean().required(),
@@ -45,6 +46,7 @@ export const useDashboardAddressForm = (address?: Address) => {
     title: '',
     first_name: '',
     last_name: '',
+    vat_id: '',
     address: '',
     postcode: '',
     city: '',
@@ -91,6 +93,15 @@ export const useDashboardAddressForm = (address?: Address) => {
         error={!!formState.errors.last_name}
         message={getLocalizedErrorMessage(intl, formState.errors.last_name?.message)}
         {...register('last_name')}
+      />
+      <TextField
+        aria-invalid={!!formState.errors.vat_id}
+        required
+        id="vat_id"
+        label={intl.formatMessage(managementMessages.vat_idInputLabel)}
+        error={!!formState.errors.vat_id}
+        message={getLocalizedErrorMessage(intl, formState.errors.vat_id?.message)}
+        {...register('vat_id')}
       />
       <TextField
         aria-invalid={!!formState.errors.address}
